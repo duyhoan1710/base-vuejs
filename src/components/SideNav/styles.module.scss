@@ -1,0 +1,68 @@
+.side-nav {
+  * {
+    color: #fff;
+    background-color: transparent;
+  }
+
+  height: 100%;
+  background-color: #840000;
+
+  .menu-item {
+    background-color: transparent;
+    margin: 3px 0;
+    border-right: none;
+
+    &:hover,
+    &:focus {
+      background-color: #b13b3b;
+    }
+
+    .submenu-item {
+      background-color: transparent;
+
+      &:hover,
+      &:focus {
+        background-color: #b13b3b;
+      }
+    }
+  }
+  .sub-item-menu {
+    &:hover {
+      background-color: transparent !important;
+    }
+  }
+  .menu-group {
+    .icon-menu {
+      width: 18px;
+      height: 18px;
+      margin-right: 10px;
+    }
+    .sub-menu-item {
+      &:hover {
+        background-color: #b13b3b;
+      }
+    }
+  }
+
+  .el-submenu__title {
+    background-color: transparent;
+    padding-left: 25px !important;
+
+    &:hover,
+    &:focus {
+      background-color: transparent;
+    }
+  }
+
+  .is-active {
+    background-color: #b13b3b !important;
+    color: #fff;
+
+    .menu-image {
+      background-image: url(~@/assets/images/group-user.svg);
+    }
+  }
+  .is-opened {
+    background-color: transparent !important;
+  }
+}

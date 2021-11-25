@@ -1,0 +1,55 @@
+stages:
+ - DeployDev
+ - DeployStaging
+ - DeployProduction
+
+DeployDev:
+  stage: DeployDev
+  image: node:14.17.6-alpine
+  only:
+    - develop
+  script:
+    - apk add rsync && apk add openssh
+    - mkdir -p ~/.ssh
+    - ssh-keyscan -H '54.255.204.176'  >> ~/.ssh/known_hosts
+    - echo "$DEV_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - echo "$DEV_FRONTEND_ENV" > .env
+    - npm install
+    - npm run build
+    - rsync -avzh --exclude='.git' -e "ssh -i ~/.ssh/id_rsa " --rsync-path="sudo rsync" . ubuntu@54.255.204.176:/var/www/html/shouhin-front
+    - ssh -i ~/.ssh/id_rsa ubuntu@54.255.204.176 "cd /var/www/html/shouhin-front && pm2 restart shouhin-api && sudo chown -R ubuntu:ubuntu ."
+
+DeployStaging:
+  stage: DeployStaging
+  image: node:14.17.6-alpine
+  only:
+    - staging
+  script:
+    - apk add rsync && apk add openssh
+    - mkdir -p ~/.ssh
+    - ssh-keyscan -H '54.255.204.176'  >> ~/.ssh/known_hosts
+    - echo "$DEV_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - echo "$STG_FRONTEND_ENV" > .env
+    - npm install
+    - npm run build
+    - rsync -avzh --exclude='.git' -e "ssh -i ~/.ssh/id_rsa " --rsync-path="sudo rsync" . ubuntu@54.255.204.176:/var/www/html/shouhin-front-staging
+    - ssh -i ~/.ssh/id_rsa ubuntu@54.255.204.176 "cd /var/www/html/shouhin-front-staging && pm2 restart shouhin-api-staging && sudo chown -R ubuntu:ubuntu ."
+
+DeployProduction:
+  stage: DeployProduction
+  image: node:14.18-alpine
+  only:
+    - master
+  script:
+    - apk add rsync && apk add openssh
+    - mkdir -p ~/.ssh
+    - ssh-keyscan -H '13.231.247.116'  >> ~/.ssh/known_hosts
+    - echo "$PRODUCT_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - echo "$PRODUCT_FRONTEND_ENV" > .env
+    - npm install
+    - npm run build
+    - rsync -avzh --exclude='.git' -e "ssh -i ~/.ssh/id_rsa " --rsync-path="sudo rsync" . ubuntu@13.231.247.116:/var/www/html/shouhin-front
+    - ssh -i ~/.ssh/id_rsa ubuntu@13.231.247.116 "cd /var/www/html/shouhin-front && pm2 restart shouhin-api-production && sudo chown -R ubuntu:ubuntu ."

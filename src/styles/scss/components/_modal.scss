@@ -1,0 +1,28 @@
+.modal {
+  width: 720px !important;
+  position: relative;
+}
+
+.modal-body {
+  padding: 20px 30px 35px 30px;
+}
+
+.ant-modal-content {
+  border: 1px solid #97979759;
+}
+
+@media only screen and (max-width: 768px) {
+  .modal {
+    width: calc(100% - 64px) !important;
+  }
+
+  .modal-body {
+    padding: 20px 15px 26px 15px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .modal {
+    min-width: calc(100% - 30px) !important;
+  }
+}

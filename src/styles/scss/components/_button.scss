@@ -1,0 +1,53 @@
+.btn {
+  height: 40px;
+  display: inline-block;
+  text-align: center;
+  border: 0;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  padding: 0 20px;
+
+  &:hover,
+  &:active,
+  &:focus {
+    opacity: 0.8;
+    transition: all 0.3s;
+  }
+}
+
+.btn-submit {
+  background-color: #0285fc !important;
+  color: #fff !important;
+}
+
+.btn-disable {
+  background-color: #dec0e6;
+  color: $white;
+  width: 315px;
+  pointer-events: none;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: #dec0e6 !important;
+    color: $white;
+  }
+}
+
+.btn-cancel {
+  background-color: $whiteF8;
+  color: $black6;
+  border: 1px solid $blackC;
+  width: 315px;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $whiteF8 !important;
+    color: $black6;
+    border: 1px solid $blackC;
+  }
+}

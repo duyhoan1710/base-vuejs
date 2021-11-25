@@ -1,0 +1,15 @@
+.auth-page {
+  max-width: 50%;
+  margin: 0 auto;
+  padding-top: 100px;
+
+  .link-to-page {
+    display: block;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 80%;
+  }
+}
+
