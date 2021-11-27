@@ -13,7 +13,7 @@ export const formatNumber = (value) => {
 
 export const formatDate = (value) => {
   if (!value) return;
-  return moment(value).format('YYYY-MM-DD');
+  return moment(value).format('YYYY/MM/DD');
 };
 
 export const formatMonth = (value) => {

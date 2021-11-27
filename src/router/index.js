@@ -6,9 +6,11 @@ import * as pageName from '@/constants/pageName';
 import * as pageRouter from '@/constants/pageRouter';
 
 const LoginPage = () => import('@/views/Auth/Login');
+const RegisterCognitoPage = () => import('@/views/Auth/RegisterCognito');
 const RegisterPage = () => import('@/views/Auth/Register');
 
 const HomePage = () => import('@/views/Home');
+const MedicalDeclarationPage = () => import('@/views/MedicalDeclaration');
 
 Vue.use(VueRouter);
 
@@ -17,6 +19,11 @@ const routes = [
     path: pageRouter.LOGIN,
     component: LoginPage,
     name: pageName.LOGIN,
+  },
+  {
+    path: pageRouter.REGISTER_COGNITO,
+    component: RegisterCognitoPage,
+    name: pageName.REGISTER_COGNITO,
   },
   {
     path: pageRouter.REGISTER,
@@ -31,9 +38,15 @@ const routes = [
   {
     path: pageRouter.HOME,
     component: HomePage,
+    name: pageName.HOME,
     meta: {
       layout: pageName.LAYOUT,
     },
+  },
+  {
+    path: pageRouter.MEDICAL_DECLARATION,
+    component: MedicalDeclarationPage,
+    name: pageName.MEDICAL_DECLARATION,
   },
 ];
 

@@ -13,9 +13,11 @@
   }
 }
 
-.input-native {
-  max-width: 100%;
+.input-native .v-input {
   height: 40px;
-  background: #FFFFFF 0% 0% no-repeat padding-box;
-  opacity: 1;
+  height: 100%;
+
+  .v-input__slot {
+    min-height: 40px !important;
+  }
 }
