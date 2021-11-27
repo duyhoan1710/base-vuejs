@@ -39,14 +39,9 @@ axios.interceptors.response.use(
     const originalConfig = error.config;
 
     if (error.response.status === 401) {
-      if (window.isCallRefresh) return;
-
-      window.isCallRefresh = true;
       const refreshToken = getRefreshToken();
       if (!refreshToken) {
         logout();
-        window.isCallRefresh = false;
-
         return Promise.reject(error);
       }
 
@@ -60,22 +55,18 @@ axios.interceptors.response.use(
             const token = res.data?.data?.accessToken;
             setToken(token);
             originalConfig.headers.authorization = `Bearer ${token}`;
-            window.isCallRefresh = false;
             return Axios(originalConfig);
           } else {
-            window.isCallRefresh = false;
             logout();
             return Promise.reject(error);
           }
         })
         .catch(() => {
           logout();
-          window.isCallRefresh = false;
           return Promise.reject(error);
         });
-    } else if (error.response.data.errorCode === 'E_101') {
-      logout();
     }
+
     return Promise.reject(error);
   }
 );
