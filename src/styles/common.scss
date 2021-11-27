@@ -1,0 +1,12 @@
+.content-page {
+  max-width: 40%;
+  margin: 0 auto;
+
+  @media (max-width: 991px) {
+    max-width: 80%;
+  }
+
+  @media (max-width: 576px) {
+    max-width: calc(100% - 20px);
+  }
+}

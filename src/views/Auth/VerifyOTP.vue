@@ -1,18 +1,16 @@
 <template>
-  <div class="verify-otp-page auth-page">
+  <div class="content-page verify-otp-page auth-page">
     <ValidationObserver v-slot="{ handleSubmit }">
       <v-form class="form" @submit.prevent="handleSubmit(submitForm)">
         <ValidationProvider rules="required" v-slot="{ errors }">
-          <div class="input-with-label">
-            <label>{{ $t('login.email') }}</label>
-            <v-text-field
-              :error-messages="errors"
-              v-model="form.code"
-              outlined
-              single-line
-            >
-            </v-text-field>
-          </div>
+          <TextField
+            :title="$t('login.email')"
+            :error-messages="errors"
+            v-model="form.code"
+            outlined
+            single-line
+          >
+          </TextField>
         </ValidationProvider>
 
         <v-btn class="btn btn-submit" type="submit">{{

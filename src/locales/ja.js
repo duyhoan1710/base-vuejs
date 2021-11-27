@@ -18,8 +18,10 @@ export default {
 
   registerCognito: {
     email: 'メールアドレス',
-    codeAuthen: '認証コード',
-    btnRegister: '登録ボタン',
+    password: 'パスワード',
+    termOfUse: '利用規約に同意する',
+    btnRegister: '新規登録',
+    linkToLogin: '既存のアカウントでログインする',
   },
 
   verifyOTP: {

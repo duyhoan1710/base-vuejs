@@ -1,35 +1,46 @@
 <template>
-  <div class="register-cognito-page auth-page">
+  <div class="content-page register-cognito-page auth-page">
     <ValidationObserver v-slot="{ handleSubmit }">
       <v-form class="form" @submit.prevent="handleSubmit(submitForm)">
         <ValidationProvider rules="required" v-slot="{ errors }">
-          <div class="input-with-label">
-            <label>{{ $t('register.email') }}</label>
-            <v-text-field
-              :error-messages="errors"
-              v-model="form.email"
-              outlined
-              single-line
-            >
-            </v-text-field>
-          </div>
+          <TextField
+            :error-messages="errors"
+            v-model="form.email"
+            outlined
+            single-line
+            :title="$t('registerCognito.email')"
+          >
+          </TextField>
         </ValidationProvider>
 
         <ValidationProvider rules="required" v-slot="{ errors }">
-          <div class="input-with-label">
-            <label>{{ $t('register.codeAuthen') }}</label>
-            <v-text-field
-              v-model="form.password"
-              :error-messages="errors"
-              outlined
-              single-line
-            ></v-text-field>
-          </div>
+          <TextField
+            :title="$t('registerCognito.password')"
+            v-model="form.password"
+            :error-messages="errors"
+            outlined
+            single-line
+          ></TextField>
+        </ValidationProvider>
+
+        <ValidationProvider rules="required" v-slot="{ errors }">
+          <v-checkbox
+            v-model="form.useOfTerm"
+            :error-messages="errors"
+            :label="$t('registerCognito.termOfUse')"
+          ></v-checkbox>
         </ValidationProvider>
 
         <v-btn class="btn btn-submit buttonSubmit" type="submit">{{
-          $t('register.btnRegister')
+          $t('registerCognito.btnRegister')
         }}</v-btn>
+
+        <router-link
+          :to="pageRouter.LOGIN"
+          class="link-to-page text-align-center mt-20"
+        >
+          {{ $t('registerCognito.linkToLogin') }}
+        </router-link>
       </v-form>
     </ValidationObserver>
   </div>
@@ -37,13 +48,14 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
+import TextField from '@/components/TextField';
 
 import { authService } from '@/services/auth.service';
 import * as pageRouter from '@/constants/pageRouter';
 import { handleError } from '@/helper';
 
 export default {
-  components: { ValidationProvider, ValidationObserver },
+  components: { ValidationProvider, ValidationObserver, TextField },
   data() {
     return {
       pageRouter,

@@ -1,30 +1,25 @@
 <template>
-  <div class="auth-page login-page" v-if="!isVerifyOTP">
+  <div class="content-page auth-page login-page" v-if="!isVerifyOTP">
     <ValidationObserver v-slot="{ handleSubmit }">
       <v-form class="form" @submit.prevent="handleSubmit(submitForm)">
         <ValidationProvider rules="required" v-slot="{ errors }">
-          <div class="input-with-label">
-            <label>{{ $t('login.email') }}</label>
-            <v-text-field
-              :error-messages="errors"
-              v-model="form.email"
-              outlined
-              single-line
-            >
-            </v-text-field>
-          </div>
+          <TextField
+            v-model="form.email"
+            :error-messages="errors"
+            :title="$t('login.email')"
+            outlined
+            single-line
+          />
         </ValidationProvider>
 
         <ValidationProvider rules="required" v-slot="{ errors }">
-          <div class="input-with-label">
-            <label>{{ $t('login.password') }}</label>
-            <v-text-field
-              v-model="form.password"
-              :error-messages="errors"
-              outlined
-              single-line
-            ></v-text-field>
-          </div>
+          <TextField
+            :title="$t('login.password')"
+            v-model="form.password"
+            :error-messages="errors"
+            outlined
+            single-line
+          ></TextField>
         </ValidationProvider>
 
         <router-link class="link-to-page mb-10" :to="pageRouter.REGISTER">{{
@@ -44,13 +39,14 @@
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import VerifyOTP from './VerifyOTP.vue';
+import TextField from '@/components/TextField';
 
 import { authService } from '@/services/auth.service';
 import * as pageRouter from '@/constants/pageRouter';
 import { handleError } from '@/helper';
 
 export default {
-  components: { ValidationProvider, ValidationObserver, VerifyOTP },
+  components: { ValidationProvider, ValidationObserver, VerifyOTP, TextField },
   data() {
     return {
       pageRouter,
@@ -79,6 +75,11 @@ export default {
       } finally {
         this.isLoadingLogin = false;
       }
+    },
+  },
+  watch: {
+    'form.email': function (val) {
+      console.log(val);
     },
   },
 };
