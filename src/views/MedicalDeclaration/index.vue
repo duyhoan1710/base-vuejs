@@ -27,11 +27,10 @@
 
           <div class="block-declare">
             <h3>接種券番号 *</h3>
-            <ValidationProvider rrules="required" v-slot="{ errors }">
+            <ValidationProvider rules="required" v-slot="{ errors }">
               <TextField
                 v-model="form.ticket"
                 :error-messages="errors"
-                class="input-native"
                 disabled
               />
             </ValidationProvider>
@@ -39,10 +38,9 @@
 
           <div class="block-declare">
             <h3>生年月日 *</h3>
-            <ValidationProvider rrules="required" v-slot="{ errors }">
+            <ValidationProvider rules="required" v-slot="{ errors }">
               <TextField
                 v-model="form.birthday"
-                class="input-native"
                 disabled
                 placeholder="1990/01/01"
                 :error-messages="errors"
@@ -52,7 +50,7 @@
 
           <div class="block-declare">
             <h3>性別 *</h3>
-            <ValidationProvider rrules="required" v-slot="{ errors }">
+            <ValidationProvider rules="required" v-slot="{ errors }">
               <v-radio-group v-model="form.gender" :error-messages="errors">
                 <v-radio
                   v-for="el in Object.keys(genderEnum.data)"
@@ -90,7 +88,7 @@
 
           <div class="block-declare">
             <h3>分類 *</h3>
-            <ValidationProvider rrules="required" v-slot="{ errors }">
+            <ValidationProvider rules="required" v-slot="{ errors }">
               <TextField
                 v-model="form.classification"
                 :error-messages="errors"

@@ -1,5 +1,5 @@
 <template>
-  <div class="input-with-label">
+  <div :class="title ? 'input-with-label' : 'input-native'">
     <label v-if="!!title">{{ title }}</label>
     <v-text-field v-bind="$attrs" v-on="$listeners" />
   </div>
